@@ -1,20 +1,18 @@
 defmodule SchemaPrefixes.UsersContext do
-  import Ecto.Query
-
   alias SchemaPrefixes.Repo
   alias SchemaPrefixes.User
 
-  def list_users(tenant) do
-    Repo.all(User, prefix: tenant)
+  def list_users() do
+    Repo.all(User)
   end
 
-  def get_user!(tenant, id) do
-    Repo.get!(User, id, prefix: tenant)
+  def get_user!(id) do
+    Repo.get!(User, id)
   end
 
-  def create_user(tenant, attrs \\ %{}) do
+  def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
-    |> Repo.insert(prefix: tenant)
+    |> Repo.insert()
   end
 end
